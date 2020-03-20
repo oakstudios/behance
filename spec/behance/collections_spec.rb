@@ -24,7 +24,7 @@ describe Behance::Client::Collections do
       end
 
       it "gets an collections list" do
-        @collections.size.should == 3
+        @collections.size.should == 10
       end
     end
 
@@ -36,7 +36,7 @@ describe Behance::Client::Collections do
       end
 
       it "gets an collections list" do
-        @collections = @client.collections(@options).size.should == 3
+        @collections = @client.collections(@options).size.should == 10
       end
     end
   end
@@ -54,7 +54,7 @@ describe Behance::Client::Collections do
     end
 
     it "gets a single collection" do
-      @collection["id"].should == "4776629"
+      @collection["id"].should == 9866
     end
   end
 
@@ -72,20 +72,20 @@ describe Behance::Client::Collections do
       end
 
       it "gets a list of projects" do
-        @projects.size.should == 2
+        @projects.size.should == 12
       end
     end
 
     context "with parameters" do
       before do
-        @options.stub!(page: 1, time: Time.new)
+        @options.stub(page: 1, time: Time.new)
         stub_get("collections/1/projects").with(query: @options).
           to_return(body: fixture("collection_projects.json"))
       end
 
       it "gets a list of projects" do
         @projects = @client.collection_projects(1, @options).
-          size.should == 2
+          size.should == 12
       end
     end
   end
